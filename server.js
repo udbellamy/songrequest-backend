@@ -81,23 +81,26 @@ router.get("/searchSongs", (req, res) => {
 router.post("/postSongToQueue", (req, res) => {
   _id = req.query._id
   user = req.query.user
-  SongList.findById( _id, err => {
+  SongList = SongList.findById( _id, err => {
     if (err) return res.json({ success: false, error: err });
-    Song = {
-      artist: "",
-      song: "",
-      user: "",
-      link: ""
-    }
-    Song.artist=SongList.artist
-    Song.song=Songlist.song
-    Song.user=user
-    Song.link=""
+    return res.json({ success: true, SongList: SongList });
+  }
+  console.log(SongList)
+  Song = {
+    artist: "",
+    song: "",
+    user: "",
+    link: ""
+  }
+  Song.artist=SongList[0].artist
+  Song.song=Songlist[0].song
+  Song.user=user
+  Song.link=""
 
-    Queue.save(err => {
-      if (err) return res.json({ success: false, error: err });
-      return Song.json({ success: true });
-    });
+  Queue.save(err => {
+    if (err) return res.json({ success: false, error: err });
+    return Song.json({ success: true });
+  });
   });
 });
 
