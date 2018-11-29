@@ -83,17 +83,17 @@ router.post("/postSongToQueue", (req, res) => {
   user = req.query.user
   SongFound = SongList.findById( _id, err => {
     if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true, SongList: SongList });
+    return res[0].toObject();
   });
-  console.log(SongFound["obj"])
+  console.log(SongFound)
   let Song = {
     artist: "",
     song: "",
     user: "",
     link: ""
   }
-  Song.artist=SongFound["obj"].artist
-  Song.song=SongFound["obj"].song
+  Song.artist=SongFound.artist
+  Song.song=SongFound.song
   Song.user=user
   Song.link=""
 
