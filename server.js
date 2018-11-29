@@ -60,7 +60,7 @@ router.get("/getSongList", (req, res) => {
   });
 });
 
-router.get("/getSongQueue", (req, res) => {
+router.get("/getQueue", (req, res) => {
   let newQueue = new SongList({});
       newQueue.save();
   Queue.find({}, {"artist": 1, "song": 1, "user": 1, "link": 1}, (err, Queue) => {
