@@ -87,16 +87,16 @@ router.get("/getSongById", (req, res) => {
 // this is our update method
 // this method overwrites existing data in our database
 router.post("/postSongToQueue", (req, res) => {
-  let Queue = new Queue();
+  let song = new Queue();
   user = req.query.user
   artist = req.query.artist
   song = req.query.song
 
-  Queue.artist=artist
-  Queue.song=song
-  Queue.user=user
-  Song.link=""
-  Queue.save(err => {
+  song.artist=artist
+  song.song=song
+  song.user=user
+  song.link=""
+  song.save(err => {
     if (err) return res.json({ success: false, error: err });
     return Song.json({ success: true });
   });
