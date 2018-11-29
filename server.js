@@ -88,7 +88,6 @@ router.delete("/deleteSongById", (req, res) => {
   _id = req.query._id
   Queue.findByIdAndRemove(_id, (err, res) => {
     if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true });
   });
 });
 
