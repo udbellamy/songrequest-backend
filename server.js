@@ -89,8 +89,8 @@ router.post("/postSongToQueue", (req, res) => {
       user: "",
       link: ""
     }
-    Song.artist=SongList[0].artist
-    Song.song=Songlist[0].song
+    Song.artist=SongList.artist
+    Song.song=Songlist.song
     Song.user=user
     Song.link=""
 
