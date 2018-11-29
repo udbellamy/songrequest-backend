@@ -38,7 +38,7 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", '*');
   res.header("Access-Control-Allow-Credentials", true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json,XMLHttpRequest');
   next();
 });
 
@@ -98,7 +98,7 @@ router.post("/postSongToQueue", (req, res) => {
   songToQueue.link=""
   songToQueue.save(err => {
     if (err) return res.json({ success: false, error: err });
-    return songToQueue.json({ success: true });
+    return res.json({ success: true });
   });
 });
 
