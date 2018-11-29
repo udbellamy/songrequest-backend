@@ -84,7 +84,7 @@ router.post("/postSongToQueue", (req, res) => {
   SongList = SongList.findById( _id, err => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, SongList: SongList });
-  }
+  });
   console.log(SongList)
   Song = {
     artist: "",
@@ -100,7 +100,6 @@ router.post("/postSongToQueue", (req, res) => {
   Queue.save(err => {
     if (err) return res.json({ success: false, error: err });
     return Song.json({ success: true });
-  });
   });
 });
 
