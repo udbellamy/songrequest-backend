@@ -52,8 +52,8 @@ app.use(function(req, res, next) {
 // });
 
 router.get("/getSongList", (req, res) => {
-  let newSongList = new SongList({});
-      newSongList.save();
+  // let newSongList = new SongList({});
+  //     newSongList.save();
   SongList.find({}, {"artist": 1, "song": 1, "inqueue": 1}, (err, SongList) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, SongList: SongList });
@@ -61,8 +61,6 @@ router.get("/getSongList", (req, res) => {
 });
 
 router.get("/getQueue", (req, res) => {
-  let newQueue = new Queue({});
-      newQueue.save();
   Queue.find({}, {"artist": 1, "song": 1, "user": 1, "link": 1}, (err, Queue) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, Queue: Queue });
@@ -70,8 +68,6 @@ router.get("/getQueue", (req, res) => {
 });
 
 router.get("/searchSongs", (req, res) => {
-  let newSongList = new SongList({});
-      newSongList.save();
   artist = req.query.artist
   song = req.query.song
   SongList.find({ $and:[ {'artist': { '$regex' : artist, '$options' : 'i' }}, {'song': { '$regex' : song, '$options' : 'i' } } ]}, {"artist": 1, "song": 1, "inqueue": 1}, (err, SongList) => {
