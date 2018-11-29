@@ -78,29 +78,24 @@ router.get("/searchSongs", (req, res) => {
 
 router.get("/getSongById", (req, res) => {
   _id = req.query._id
-  SongList.findById(_id, 'artist song', { lean: true }, (err, Queue) => {
+  SongList.findById(_id, 'artist song', { lean: true }, (err, Song) => {
     if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true, Queue: Queue });
+    return res.json({ success: true, Song: Song });
   });
 });
 
 // this is our update method
 // this method overwrites existing data in our database
 router.post("/postSongToQueue", (req, res) => {
+  let Queue = new Queue();
   user = req.query.user
-  SongFound = SongList.findById(_id, 'artist song', { lean: true }, function (err, res) {});
-  console.log(`SongFound["obj"] `, SongFound["obj"])
-  let Song = {
-    artist: "",
-    song: "",
-    user: "",
-    link: ""
-  }
-  Song.artist=SongFound.artist
-  Song.song=SongFound.song
-  Song.user=user
-  Song.link=""
+  artist = req.query.artist
+  song = req.query.song
 
+  Queue.artist=artist
+  Queue.song=song
+  Queue.user=user
+  Song.link=""
   Queue.save(err => {
     if (err) return res.json({ success: false, error: err });
     return Song.json({ success: true });
