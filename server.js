@@ -76,10 +76,17 @@ router.get("/searchSongs", (req, res) => {
   });
 });
 
+router.get("/getSongById", (req, res) => {
+  _id = req.query._id
+  SongList.findById(_id, 'artist song', { lean: true }, (err, Queue) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, Queue: Queue });
+  });
+});
+
 // this is our update method
 // this method overwrites existing data in our database
 router.post("/postSongToQueue", (req, res) => {
-  _id = req.query._id
   user = req.query.user
   SongFound = SongList.findById(_id, 'artist song', { lean: true }, function (err, res) {});
   console.log(`SongFound["obj"] `, SongFound["obj"])
