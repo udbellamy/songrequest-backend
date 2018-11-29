@@ -61,7 +61,7 @@ router.get("/getSongList", (req, res) => {
 });
 
 router.get("/getQueue", (req, res) => {
-  let newQueue = new SongList({});
+  let newQueue = new Queue({});
       newQueue.save();
   Queue.find({}, {"artist": 1, "song": 1, "user": 1, "link": 1}, (err, Queue) => {
     if (err) return res.json({ success: false, error: err });
