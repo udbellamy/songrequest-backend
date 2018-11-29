@@ -78,34 +78,20 @@ router.get("/searchSongs", (req, res) => {
 
 // this is our update method
 // this method overwrites existing data in our database
-router.post("/updateStatus", (req, res) => {
-  const { trigramme, statusUpdate } = req.body;
-  console.log(req.body)
-  Data.findOneAndUpdate({ trigramme: { $eq: trigramme } }, statusUpdate, err => {
+router.post("/postSongToQueue", (req, res) => {
+  _id = req.query._id
+  user = req.query.user
+  SongList.findById( _id, err => {
     if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true });
-  });
-});
+    Song.artist=SongList[0].artist
+    Song.song=Songlist[0].song
+    Song.user=user
+    Song.link=""
 
-// this is our update method
-// this method overwrites existing data in our database
-router.post("/updatequeueNumber", (req, res) => {
-  const { trigramme, queueNumberUpdate } = req.body;
-  console.log(req.body)
-  Data.findOneAndUpdate({ trigramme: { $eq: trigramme } }, queueNumberUpdate, err => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true });
-  });
-});
-
-// this is our update method
-// this method overwrites existing data in our database
-router.post("/updatejobNumber", (req, res) => {
-  const { trigramme, jobNumberUpdate } = req.body;
-  console.log(req.body)
-  Data.findOneAndUpdate({ trigramme: { $eq: trigramme } }, jobNumberUpdate, err => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true });
+    Queue.save(err => {
+      if (err) return res.json({ success: false, error: err });
+      return Song.json({ success: true });
+    });
   });
 });
 
