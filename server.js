@@ -81,10 +81,7 @@ router.get("/searchSongs", (req, res) => {
 router.post("/postSongToQueue", (req, res) => {
   _id = req.query._id
   user = req.query.user
-  SongFound = SongList.findById( _id, (err, res) => {
-    if (err) return res.json({ success: false, error: err });
-    return res["obj"].toObject();
-  });
+  SongFound = SongList.findById(_id).exec(callback);
   console.log(SongFound)
   let Song = {
     artist: "",
