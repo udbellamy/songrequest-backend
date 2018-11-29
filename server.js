@@ -84,6 +84,14 @@ router.get("/getSongById", (req, res) => {
   });
 });
 
+router.delete("/deleteSongById", (req, res) => {
+  _id = req.query._id
+  SongList.findByIdAndRemove(_id, (err, res) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true });
+  });
+});
+
 // this is our update method
 // this method overwrites existing data in our database
 router.post("/postSongToQueue", (req, res) => {
